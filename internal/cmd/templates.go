@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/vincentlossel/markright/internal/services"
 
@@ -15,9 +16,19 @@ var templateCmd = &cobra.Command{
 		allTemplates, err := services.ListTemplates()
 		if err != nil {
 			// TODO: Handle errors
+			fmt.Println(err)
 		}
 
-		fmt.Println("allTemplates:", allTemplates)
+		if len(allTemplates) < 1 {
+			fmt.Println("No template available")
+			return
+		}
+
+		fmt.Println("Available templates:")
+		for _, template := range allTemplates {
+			fileName := strings.ReplaceAll(template.Name(), ".md", "")
+			fmt.Println("*", services.GetActionableFileName(fileName))
+		}
 	},
 }
 

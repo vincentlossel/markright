@@ -6,9 +6,11 @@ import (
 	"github.com/spf13/viper"
 )
 
+// TODO: Pass the config in a struct
 type Config struct {
 }
 
+// TODO:
 func NewConfig() Config {
 	return Config{}
 }
@@ -29,5 +31,6 @@ func loadConfig() {
 
 func setDefaultConfig() {
 	viper.SetDefault("templates.source", "~/")
+	viper.SetDefault("templates.target", "~/")
 	viper.SetDefault("data.source", "~/.config/markright/")
 }
