@@ -11,7 +11,8 @@ import (
 
 var templateCmd = &cobra.Command{
 	Use:   "templates",
-	Short: "",
+	Short: "Get the list of available templates",
+	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
 		allTemplates, err := services.ListTemplates()
 		if err != nil {
@@ -24,10 +25,15 @@ var templateCmd = &cobra.Command{
 			return
 		}
 
+		// TODO: Filter valid templates
+		// TODO: Show default template
+
 		fmt.Println("Available templates:")
 		for _, template := range allTemplates {
 			fileName := strings.ReplaceAll(template.Name(), ".md", "")
-			fmt.Println("*", services.GetActionableFileName(fileName))
+			actionableFileName := services.GetActionableFileName(fileName)
+
+			fmt.Println("*", actionableFileName)
 		}
 	},
 }

@@ -6,16 +6,25 @@ import (
 	"time"
 )
 
-func GenerateFileName(fileName string) string {
+func GenerateFileName(fileName string, addTimestamp bool) string {
 	fileName = strings.ReplaceAll(fileName, ".md", "")
-	now := time.Now()
-	timestamp := now.UnixMicro()
 
-	// Returns the template name with a timestamp
-	return fmt.Sprintf("%s %d", fileName, timestamp)
+	// Timestamp is optional
+	if addTimestamp {
+		now := time.Now()
+		timestamp := now.UnixMicro()
+
+		newFileName := fmt.Sprintf("%s %d", fileName, timestamp)
+		return newFileName
+	}
+
+	return fmt.Sprintf("%s", fileName)
 }
 
 // Temporary solution to pass a filename as an arg (without spaces)
 func GetActionableFileName(fileName string) string {
-	return strings.ReplaceAll(fileName, " ", "")
+	fileName = strings.ReplaceAll(fileName, " ", "")
+	fileName = strings.ReplaceAll(fileName, ".md", "")
+
+	return fileName
 }

@@ -30,7 +30,11 @@ func loadConfig() {
 }
 
 func setDefaultConfig() {
+	viper.SetDefault("global.timestamp", true)
+
 	viper.SetDefault("templates.source", "~/")
 	viper.SetDefault("templates.target", "~/")
+	viper.SetDefault("templates.default", "DailyReview")
+
 	viper.SetDefault("data.source", "~/.config/markright/")
 }

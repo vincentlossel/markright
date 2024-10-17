@@ -11,6 +11,6 @@ func main() {
 }
 
 func initConfig() {
-	setDefaultConfig()
 	loadConfig()
+	setDefaultConfig()
 }
